@@ -67,11 +67,14 @@ const Button = props => {
 }
 
 Button.propTypes = {
-    code: PropTypes.string,
+    id: PropTypes.string,
+    class: PropTypes.string,
     type: PropTypes.string,
-    style: PropTypes.object,
+    text: PropTypes.string,
+    code: PropTypes.string,
     iconRight: PropTypes.bool,
     disabled: PropTypes.bool,
+    style: PropTypes.object,
     onClick: PropTypes.func.isRequired,
 }
 
