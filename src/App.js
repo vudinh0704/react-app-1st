@@ -4,14 +4,17 @@ import Button from './component/basic/Button';
 import Icon from './component/basic/Icon';
 import Input from './component/basic/Input';
 import Popup from './component/basic/Popup';
+import Toast from './component/basic/Toast';
 import React from 'react';
 
 function App() {
     const [popupDisplay, setPopupDisplay] = React.useState(false);
+    const [toastDisplay, setToastDisplay] = React.useState(false);
 
     React.useEffect(() => {
         if (popupDisplay) setPopupDisplay(!popupDisplay);
-    }, [popupDisplay]);
+        if (toastDisplay) setToastDisplay(!toastDisplay);
+    }, [popupDisplay, toastDisplay]);
 
     const alerts = () => alert('You just clicked on button!');
 
@@ -141,6 +144,44 @@ function App() {
                         }
                     }}
                     onClick={() => setPopupDisplay(true)}
+                />
+
+                <br />
+
+                <Toast
+                    id=''
+                    class=''
+                    type='warning'
+                    position='top-left'
+                    content='An error has occured!'
+                    timeout='5'
+                    smoothingCoefficient='0.1'
+                    isShow={toastDisplay}
+                    style={{
+                        'root': {},
+                        'header': {},
+                        'progress-bar-cover': {},
+                        'progress-bar-core': {},
+                        'body': {}
+                    }}
+                />
+
+                <Button
+                    id=''
+                    class=''
+                    type='edit'
+                    text='Toast'
+                    iconRight={false}
+                    disabled={false}
+                    style={{
+                        'button': {
+
+                        },
+                        'icon': {
+
+                        }
+                    }}
+                    onClick={() => setToastDisplay(true)}
                 />
             </header>
         </div>
