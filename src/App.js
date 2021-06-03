@@ -1,8 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from './component/basic/Button';
 import Icon from './component/basic/Icon';
 
 function App() {
+    const alerts = () => alert('You just clicked on button!');
+
     return (
         <div className="App">
             <header className="App-header">
@@ -30,6 +33,26 @@ function App() {
                         'cursor': 'pointer',
                         'fontSize': '25px'
                     }}
+                />
+
+                <br />
+
+                <Button
+                    id=''
+                    class=''
+                    type='accept'
+                    text=''
+                    iconRight={false}
+                    disabled={false}
+                    style={{
+                        'button': {
+
+                        },
+                        'icon': {
+
+                        }
+                    }}
+                    onClick={alerts}
                 />
             </header>
         </div>
