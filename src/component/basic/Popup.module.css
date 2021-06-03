@@ -1,0 +1,44 @@
+.popup {
+    background-clip: padding-box;
+    background-color: rgba(255,255,255,.85);
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: .25rem;
+    box-shadow: 0 .5rem 1rem rgb(0 0 0 / 15%);
+    font-size: .875rem;
+    max-width: 100%;
+    pointer-events: auto;
+    width: 350px;
+    -webkit-border-radius: .25rem;
+    -moz-border-radius: .25rem;
+    -ms-border-radius: .25rem;
+    -o-border-radius: .25rem;
+}
+
+.popup__header {
+    align-items: center;
+    background-clip: padding-box;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+    color: #41529d;
+    display: flex;
+    font-weight: 500;
+    justify-content: space-between;
+    padding: .95rem .75rem;
+}
+
+.popup__body {
+    background-color: #e2e3e5;
+    border-bottom: 1px solid #bcc6cc;
+    border-top: 1px solid #bcc6cc;
+    color: #41529d;
+    padding: .75rem .75rem;
+    text-align: left;
+}
+
+.popup__footer {
+    border-bottom-left-radius: calc(.25rem - 1px);
+    border-bottom-right-radius: calc(.25rem - 1px);
+    display: flex;
+    justify-content: flex-end;
+    padding: .4rem 1rem;
+}

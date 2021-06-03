@@ -3,8 +3,16 @@ import './App.css';
 import Button from './component/basic/Button';
 import Icon from './component/basic/Icon';
 import Input from './component/basic/Input';
+import Popup from './component/basic/Popup';
+import React from 'react';
 
 function App() {
+    const [popupDisplay, setPopupDisplay] = React.useState(false);
+
+    React.useEffect(() => {
+        if (popupDisplay) setPopupDisplay(!popupDisplay);
+    }, [popupDisplay]);
+
     const alerts = () => alert('You just clicked on button!');
 
     return (
@@ -78,6 +86,61 @@ function App() {
                             'color': '#006666'
                         }
                     }}
+                />
+
+                <br />
+
+                <Popup
+                    id=''
+                    class=''
+                    position=''
+                    root={{}}
+                    header={{
+                        'text': '',
+                        'color': '#f41c78'
+                    }}
+                    body={{}}
+                    footer={{}}
+                    button={{
+                        'cancelBtn': {
+                            'type': '',
+                            'text': '',
+                            'code': '',
+                            'iconRight': false,
+                            'disabled': false,
+                            'onClick': ''
+                        },
+                        'optionalBtn': {
+                            'marginRight': '.5rem',
+                            'type': 'delete',
+                            'text': '',
+                            'code': '',
+                            'iconRight': false,
+                            'disabled': true,
+                            'onClick': alerts
+                        }
+                    }}
+                    isShow={popupDisplay}
+                >
+                    A Bootstrap modal is the best way of adding popup to website pages. Open a simple modal on button click which contains the header, body and the footer. Place your notification messages or forms inside the modal and open it only when the user clicks the button or perform some action.
+                </Popup>
+
+                <Button
+                    id=''
+                    class=''
+                    type='cancel'
+                    text='Popup'
+                    iconRight={false}
+                    disabled={false}
+                    style={{
+                        'button': {
+
+                        },
+                        'icon': {
+
+                        }
+                    }}
+                    onClick={() => setPopupDisplay(true)}
                 />
             </header>
         </div>
