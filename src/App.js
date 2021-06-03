@@ -53,6 +53,7 @@ function App() {
                     id=''
                     class=''
                     type='accept'
+                    code=''
                     text=''
                     iconRight={false}
                     disabled={false}
@@ -133,6 +134,7 @@ function App() {
                     class=''
                     type='cancel'
                     text='Popup'
+                    code=''
                     iconRight={false}
                     disabled={false}
                     style={{
@@ -171,6 +173,7 @@ function App() {
                     class=''
                     type='edit'
                     text='Toast'
+                    code=''
                     iconRight={false}
                     disabled={false}
                     style={{

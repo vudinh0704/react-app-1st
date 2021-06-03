@@ -95,6 +95,8 @@ const Input = props => {
 }
 
 Input.propTypes = {
+    id: PropTypes.string,
+    class: PropTypes.string,
     type: PropTypes.string,
     label: PropTypes.string,
     placeholder: PropTypes.string,
