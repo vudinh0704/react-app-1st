@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Button from './component/basic/Button';
 import Icon from './component/basic/Icon';
+import Input from './component/basic/Input';
 
 function App() {
     const alerts = () => alert('You just clicked on button!');
@@ -53,6 +54,30 @@ function App() {
                         }
                     }}
                     onClick={alerts}
+                />
+
+                <br />
+
+                <Input
+                    id=''
+                    class=''
+                    type="money"
+                    label="Balance"
+                    placeholder="Enter amount..."
+                    inline
+                    disabled={false}
+                    readOnly={false}
+                    style={{
+                        'root': {
+
+                        },
+                        'label': {
+                            'color': '#fdf0d5'
+                        },
+                        'value': {
+                            'color': '#006666'
+                        }
+                    }}
                 />
             </header>
         </div>
