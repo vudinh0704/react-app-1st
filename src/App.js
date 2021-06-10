@@ -4,17 +4,20 @@ import Button from './component/basic/Button';
 import Icon from './component/basic/Icon';
 import Input from './component/basic/Input';
 import Popup from './component/basic/Popup';
+import ProgressBar from './component/basic/ProgressBar';
 import Toast from './component/basic/Toast';
 import React from 'react';
 
 function App() {
     const [popupDisplay, setPopupDisplay] = React.useState(false);
     const [toastDisplay, setToastDisplay] = React.useState(false);
+    const [progressBarDisPlay, setProgressBarDisplay] = React.useState(false);
+    const [progressBarOnMouseOver, setProgressBarOnMouseOver] = React.useState(2);
 
     React.useEffect(() => {
         if (popupDisplay) setPopupDisplay(!popupDisplay);
         if (toastDisplay) setToastDisplay(!toastDisplay);
-    }, [popupDisplay, toastDisplay]);
+    }, [popupDisplay, progressBarDisPlay, toastDisplay]);
 
     const alerts = () => alert('You just clicked on button!');
 
@@ -58,12 +61,8 @@ function App() {
                     iconRight={false}
                     disabled={false}
                     style={{
-                        'button': {
-
-                        },
-                        'icon': {
-
-                        }
+                        'button': {},
+                        'icon': {}
                     }}
                     onClick={alerts}
                 />
@@ -80,9 +79,7 @@ function App() {
                     disabled={false}
                     readOnly={false}
                     style={{
-                        'root': {
-
-                        },
+                        'root': {},
                         'label': {
                             'color': '#fdf0d5'
                         },
@@ -138,12 +135,8 @@ function App() {
                     iconRight={false}
                     disabled={false}
                     style={{
-                        'button': {
-
-                        },
-                        'icon': {
-
-                        }
+                        'button': {},
+                        'icon': {}
                     }}
                     onClick={() => setPopupDisplay(true)}
                 />
@@ -177,14 +170,68 @@ function App() {
                     iconRight={false}
                     disabled={false}
                     style={{
-                        'button': {
-
-                        },
-                        'icon': {
-
-                        }
+                        'button': {},
+                        'icon': {}
                     }}
                     onClick={() => setToastDisplay(true)}
+                />
+
+                <br />
+
+                <div
+                    style={{
+                        'alignItems': 'center',
+                        'backgroundColor': '#e1e2e0',
+                        'display': 'flex',
+                        'height': '100px',
+                        'justifyContent': 'center',
+                        'width': '1000px'
+                    }}
+                    onMouseEnter={() => {
+                        if (progressBarDisPlay) setProgressBarOnMouseOver(1);
+                    }}
+                    onMouseLeave={() => {
+                        if (progressBarDisPlay) setProgressBarOnMouseOver(0);
+                    }}
+                >
+                    <ProgressBar
+                        id=''
+                        class=''
+                        timeout={5}
+                        isRun={progressBarDisPlay}
+                        onMouseOver={progressBarOnMouseOver}
+                        style={{
+                            'root': {
+                                'backgroundColor': '',
+                                'height': '',
+                                'width': ''
+                            },
+                            'rate': {
+                                'backgroundColor': ''
+                            }
+                        }}
+                        onClose={() => {
+                            setProgressBarDisplay(false);
+                            setProgressBarOnMouseOver(2);
+                        }}
+                    />
+                </div>
+
+                <br />
+
+                <Button
+                    id=''
+                    class=''
+                    type='delete'
+                    text='Progress Bar'
+                    code=''
+                    iconRight={false}
+                    disabled={false}
+                    style={{
+                        'button': {},
+                        'icon': {}
+                    }}
+                    onClick={() => setProgressBarDisplay(true)}
                 />
             </header>
         </div>
