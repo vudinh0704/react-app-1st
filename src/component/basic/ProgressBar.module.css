@@ -1,0 +1,10 @@
+.progress-bar {
+    background-color: #9ea3b0;
+    height: 5px;
+    width: 500px;
+}
+
+.progress-bar__rate {
+    background-color: #fa5882;
+    height: 100%;
+}
