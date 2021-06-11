@@ -9,6 +9,7 @@ import Toast from './component/basic/Toast';
 import React from 'react';
 
 function App() {
+    debugger
     const [popupDisplay, setPopupDisplay] = React.useState(false);
     const [toastDisplay, setToastDisplay] = React.useState(false);
     const [progressBarDisPlay, setProgressBarDisplay] = React.useState(false);
@@ -17,7 +18,7 @@ function App() {
     React.useEffect(() => {
         if (popupDisplay) setPopupDisplay(!popupDisplay);
         if (toastDisplay) setToastDisplay(!toastDisplay);
-    }, [popupDisplay, progressBarDisPlay, toastDisplay]);
+    }, [popupDisplay, toastDisplay]);
 
     const alerts = () => alert('You just clicked on button!');
 
@@ -42,6 +43,8 @@ function App() {
                 <br />
 
                 <Icon
+                    id=''
+                    class='abc'
                     code='las la-hand-point-down'
                     style={{
                         'color': '#ff4d6d',
@@ -61,7 +64,7 @@ function App() {
                     iconRight={false}
                     disabled={false}
                     style={{
-                        'button': {},
+                        'root': {},
                         'icon': {}
                     }}
                     onClick={alerts}
@@ -135,45 +138,10 @@ function App() {
                     iconRight={false}
                     disabled={false}
                     style={{
-                        'button': {},
+                        'root': {},
                         'icon': {}
                     }}
                     onClick={() => setPopupDisplay(true)}
-                />
-
-                <br />
-
-                <Toast
-                    id=''
-                    class=''
-                    type='warning'
-                    position='top-left'
-                    content='An error has occured!'
-                    timeout='5'
-                    smoothingCoefficient='0.1'
-                    isShow={toastDisplay}
-                    style={{
-                        'root': {},
-                        'header': {},
-                        'progress-bar-cover': {},
-                        'progress-bar-core': {},
-                        'body': {}
-                    }}
-                />
-
-                <Button
-                    id=''
-                    class=''
-                    type='edit'
-                    text='Toast'
-                    code=''
-                    iconRight={false}
-                    disabled={false}
-                    style={{
-                        'button': {},
-                        'icon': {}
-                    }}
-                    onClick={() => setToastDisplay(true)}
                 />
 
                 <br />
@@ -199,15 +167,14 @@ function App() {
                         class=''
                         timeout={5}
                         isRun={progressBarDisPlay}
-                        onMouseOver={progressBarOnMouseOver}
+                        isHover={progressBarOnMouseOver}
                         style={{
                             'root': {
-                                'backgroundColor': '',
-                                'height': '',
-                                'width': ''
+                                'backgroundColor': '#ccc',
+                                'height': '20px',
                             },
                             'rate': {
-                                'backgroundColor': ''
+                                'backgroundColor': 'purple'
                             }
                         }}
                         onClose={() => {
@@ -228,10 +195,47 @@ function App() {
                     iconRight={false}
                     disabled={false}
                     style={{
-                        'button': {},
+                        'root': {},
                         'icon': {}
                     }}
                     onClick={() => setProgressBarDisplay(true)}
+                />
+
+                <br />
+
+                <Toast
+                    id=''
+                    class=''
+                    type='warning'
+                    position='top-left'
+                    content='An error has occured!'
+                    timeout={5}
+                    isShow={toastDisplay}
+                    style={{
+                        'root': {},
+                        'header': {},
+                        'body': {},
+                        'icon': {},
+                        'progressBar': {
+                            'root': {},
+                            'rate': {}
+                        }
+                    }}
+                />
+
+                <Button
+                    id=''
+                    class=''
+                    type='edit'
+                    text='Toast'
+                    code=''
+                    iconRight={false}
+                    disabled={false}
+                    style={{
+                        'root': {},
+                        'icon': {}
+                    }}
+                    onClick={() => setToastDisplay(true)}
                 />
             </header>
         </div>

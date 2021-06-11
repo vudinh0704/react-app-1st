@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styles from './ProgressBar.module.css';
 
 const ProgressBar = props => {
     // state
@@ -16,10 +15,10 @@ const ProgressBar = props => {
         setIsRun(props.isRun);
 
         if (props.isRun) {
-            if (props.onMouseOver === 1) {
-                onMouseOver();
-            } else if (props.onMouseOver === 0) {
-                onMouseOut();
+            if (props.isHover === 1) {
+                onMouseEnter();
+            } else if (props.isHover === 0) {
+                onMouseLeave();
             } else {
                 setWidth(0);
                 setStartTime(new Date());
@@ -29,7 +28,7 @@ const ProgressBar = props => {
 
                 timeRef.current = setTimeout(() => {
                     setWidth('100%');
-                }, 1);
+                }, 100);
 
                 clearTimeout(timeCloseRef.current);
 
@@ -38,7 +37,7 @@ const ProgressBar = props => {
                 }, timeout);
             }
         }
-    }, [props.isRun, props.onMouseOver]);
+    }, [props.isRun, props.isHover]);
 
     // init
     const timeout = props.timeout * 1000 || 5000;
@@ -47,7 +46,7 @@ const ProgressBar = props => {
         if (props.onClose) props.onClose();
     }
 
-    const onMouseOver = () => {
+    const onMouseEnter = () => {
         const rest = calcRemainTime(startTime, remainTime);
 
         setWidth((1 - (rest / timeout)) * 100 + '%');
@@ -55,15 +54,21 @@ const ProgressBar = props => {
         clearTimeout(timeCloseRef.current);
     }
 
-    const onMouseOut = () => {
+    const onMouseLeave = () => {
         setWidth('100%');
         setStartTime(new Date());
         timeCloseRef.current = setTimeout(() => onClose(), remainTime);
     }
 
-    const styleRoot = props.style?.root || {}
+    const styleRoot = {
+        'backgroundColor': '#9ea3b0',
+        'height': '5px',
+        ...props.style?.root,
+        'width': '100%'
+    }
 
     const styleRate = {
+        'backgroundColor': '#fa5882',
         ...props.style?.rate,
         'height': '100%',
         'transition': startTime !== undefined ? calcRemainTime(startTime, remainTime) / 1000 + 's all linear' : '',
@@ -74,11 +79,10 @@ const ProgressBar = props => {
     return isRun ? (
         <div
             id={props.id}
-            className={styles['progress-bar'] + ' ' + props.class}
+            className={props.class}
             style={styleRoot}
         >
             <div
-                className={styles['progress-bar__rate']}
                 style={styleRate}
             >
             </div>
@@ -99,8 +103,8 @@ ProgressBar.propTypes = {
     class: PropTypes.string,
     timeout: PropTypes.number,
     isRun: PropTypes.bool.isRequired,
-    onMouseOver: PropTypes.number,
-    onClose: PropTypes.func.isRequired
+    isHover: PropTypes.number,
+    onClose: PropTypes.func
 }
 
 export default ProgressBar;

@@ -32,12 +32,12 @@ const Button = props => {
     }
 
     const onClick = (...e) => {
-        props.onClick(e)
+        if (props.onClick) props.onClick(e);
     }
 
     const restProps = {disabled: props.disabled}
 
-    let styleRoot = props.style?.button || {}
+    let styleRoot = props.style?.root || {}
     let styleIcon = props.style?.icon || {}
 
     if (props.iconRight) {
