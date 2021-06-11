@@ -1,72 +1,32 @@
 import Icon from '../../component/basic/Icon';
+import ProgressBar from '../../component/basic/ProgressBar';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './Toast.module.css';
 
 const Toast = props => {
+    debugger
     // state
-    const [isRun, setIsRun] = React.useState(false);
     const [isShow, setIsShow] = React.useState('');
-    const [time, setTime] = React.useState(props.timeout && Number(props.timeout) > 1 ? Number(props.timeout) : 1);
-    const [width, setWidth] = React.useState(100);
+    const [isHover, setIsHover] = React.useState(2);
 
     // effect
     React.useEffect(() => {
-        if (props.isShow) onOpen();
-
-        if (!props.timeout || props.timeout === '' || props.timeout < 3) return 0;
-
-        var smoothingCoefficient = !props.smoothingCoefficient
-                                || props.smoothingCoefficient === ''
-                                || props.smoothingCoefficient <= 0
-                                || props.smoothingCoefficient > props.timeout/5
-                                ? 0.1 : props.smoothingCoefficient;
-        var i = time;
-        var rate = smoothingCoefficient/Number(props.timeout);
-
-        if (isRun === true) {
-            var loss = rate*parseInt(document.getElementById('progressBarCover').style.width);
-
-            i -= smoothingCoefficient;
-
-            if (i < 0) {
-                onClose();
-            }
-
-            var temp = (width) + '%';
-            document.getElementById('progressBarCore').style.width = temp;
-
-            var countdown = setInterval(() => {
-                setWidth(width => width - loss);
-                setTime(time => time - smoothingCoefficient);
-            }, smoothingCoefficient * 1000);
-        }
-
-        return () => clearInterval(countdown);
-    }, [props.isShow, props.timeout, props.smoothingCoefficient, isRun, isShow, time, width]);
+        if (props.isShow) setIsShow(true);
+    }, [props.isShow]);
 
     // init
-    const onOpen = () => {
-        setIsShow(true);
-        setIsRun(true);
-    }
-
     const onClose = () => {
-        setTime(props.timeout && Number(props.timeout) > 1 ? Number(props.timeout) : 0);
-        setWidth(100);
         setIsShow(false);
-        setIsRun(false);
+        setIsHover(2);
     }
 
-    const onMouseOver = () => setIsRun(false);
-    const onMouseLeave = () => setIsRun(true);
+    const onMouseEnter = () => setIsHover(1);
+    const onMouseLeave = () => setIsHover(0);
 
     // render
     const render = () => {
-        var countdown = '';
         var temp = 'top-right';
-
-        if (props.timeout && props.timeout >= 3) countdown = time.toFixed(0) + ' | ';
 
         if (props.position === 'top-left' ||
             props.position === 'top-right' ||
@@ -82,7 +42,7 @@ const Toast = props => {
             'bottom': temp === 'bottom-left' || temp === 'bottom-right' ? '1rem' : ''
         }
 
-        const headerColor = {
+        const colorHeader = {
             'color':
                 props.type === 'error' ? '#721c24' :
                 (props.type === 'warning' ? '#856404' :
@@ -95,8 +55,9 @@ const Toast = props => {
                 (props.type === 'success' ? '#d4edda' : '#d6d8d9')))
         }
 
-        const progressBarCover = {
-            'width': '100%'
+        const styleIcon = {
+            'cursor': 'pointer',
+            'fontSize': '15px'
         }
 
         return (
@@ -106,45 +67,38 @@ const Toast = props => {
                 id={props.id}
                 className={styles.toast + ' ' + props.class}
                 style={{...position, ...props.style && props.style.root}}
-                onMouseOver={onMouseOver}
+                onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
             >
                 <div
                     className={styles.toast__header}
-                    style={{...headerColor, ...props.style && props.style.header}}
+                    style={{...colorHeader, ...props.style && props.style.header}}
                 >
-                    {props.type === 'error' && <Icon code='las la-exclamation-circle' style={{'fontSize': '17.5px'}} />}
-                    {props.type === 'warning' && <Icon code='las la-exclamation-triangle' style={{'fontSize': '17.5px'}} />}
-                    {props.type === 'info' && <Icon code='las la-question-circle' style={{'fontSize': '17.5px'}} />}
-                    {props.type === 'success' && <Icon code='las la-check' style={{'fontSize': '17.5px'}} />}
+                    {props.type === 'error' && <Icon code='las la-exclamation-circle' style={{...styleIcon, ...props.style?.icon}} />}
+                    {props.type === 'warning' && <Icon code='las la-exclamation-triangle' style={{...styleIcon, ...props.style?.icon}} />}
+                    {props.type === 'info' && <Icon code='las la-question-circle' style={{...styleIcon, ...props.style?.icon}} />}
+                    {props.type === 'success' && <Icon code='las la-check' style={{...styleIcon, ...props.style?.icon}} />}
                     <span style={{'textTransform': 'capitalize'}}>{props.type}</span>
-                    <Icon code='las la-times' style={{'fontSize': '12.5px', 'cursor': 'pointer'}} onClick={onClose} />
+                    <Icon code='las la-times' style={{...styleIcon, ...props.style?.icon}} onClick={onClose} />
                 </div>
 
                 {
-                    props.timeout && props.timeout >= 3 &&
+                    props.timeout &&
 
-                    <div>
-                        <div
-                            id='progressBarCover'
-                            className={styles['toast__progress-bar-cover']}
-                            style={{...props.style && props.style['progress-bar-cover'], ...progressBarCover}}
-                        >
-                            <div
-                                id='progressBarCore'
-                                className={styles['toast__progress-bar-core']}
-                                style={{...props.style && props.style['progress-bar-core']}}
-                            >
-                            </div>
-                        </div>
-                    </div>
+                    <ProgressBar
+                        timeout={props.timeout}
+                        isRun={isShow}
+                        isHover={isHover}
+                        style={props.style.progressBar}
+                        onClose={() => onClose()}
+                    />
                 }
 
                 <div
                     className={styles.toast__body}
                     style={{...props.style && props.style.body}}
                 >
-                    {countdown}{props.content}
+                    {props.content}
                 </div>
             </div>
         );
@@ -159,9 +113,8 @@ Toast.propTypes = {
     type: PropTypes.string,
     position: PropTypes.string,
     content: PropTypes.string,
-    timeout: PropTypes.string,
-    smoothingCoefficient: PropTypes.string,
-    isShow: PropTypes.bool,
+    timeout: PropTypes.number,
+    isShow: PropTypes.bool.isRequired,
     style: PropTypes.object
 }
 

@@ -11,7 +11,7 @@ const Popup = props => {
     // effect
     React.useEffect(() => {
         if (props.isShow) setIsShow(!isShow);
-    }, [props.isShow, isShow]);
+    }, [props.isShow]);
 
     // init
     const onClose = () => {
@@ -55,7 +55,7 @@ const Popup = props => {
 
         let styleCancelBtn = {};
 
-        if (props.button.cancelBtn) {
+        if (props.button?.cancelBtn) {
             // copy values of n-layer object architecture
             styleCancelBtn = JSON.parse(JSON.stringify(props.button.cancelBtn));
 
@@ -69,7 +69,7 @@ const Popup = props => {
 
         let styleOptionalBtn = {};
 
-        if (props.button.optionalBtn) {
+        if (props.button?.optionalBtn) {
             // copy values of n-layer object architecture
             styleOptionalBtn = JSON.parse(JSON.stringify(props.button.optionalBtn));
 
@@ -100,16 +100,14 @@ const Popup = props => {
 
                 <div className={styles.popup__footer} style={styleFooter}>
                     {
-                        props.button.optionalBtn &&
+                        props.button?.optionalBtn &&
 
                         <Button
                             type={props.button.optionalBtn.type}
                             text={props.button.optionalBtn.text || 'Optional'}
                             style={{
                                 'button': {...styleOptionalBtn},
-                                'icon': {
-                                    'fontSize': '1rem'
-                                }
+                                'icon': {'fontSize': '1rem'}
                             }}
                             iconRight={props.button.optionalBtn.iconRight}
                             code={props.button.optionalBtn.code}
@@ -119,18 +117,16 @@ const Popup = props => {
                     }
 
                     <Button
-                        type={props.button.cancelBtn?.type || 'cancel'}
-                        text={props.button.cancelBtn?.text || 'Cancel'}
+                        type={props.button?.cancelBtn?.type || 'cancel'}
+                        text={props.button?.cancelBtn?.text || 'Cancel'}
                         style={{
                             'button': {...styleCancelBtn},
-                                'icon': {
-                                'fontSize': '1rem'
-                            }
+                            'icon': {'fontSize': '1rem'}
                         }}
-                        iconRight={props.button.cancelBtn?.iconRight}
-                        code={props.button.cancelBtn?.code}
-                        disabled={props.button.cancelBtn?.disabled}
-                        onClick={props.button.cancelBtn?.onClick || onClose}
+                        iconRight={props.button?.cancelBtn?.iconRight}
+                        code={props.button?.cancelBtn?.code}
+                        disabled={props.button?.cancelBtn?.disabled}
+                        onClick={props.button?.cancelBtn?.onClick || onClose}
                     />
                 </div>
             </div>
@@ -149,7 +145,7 @@ Popup.propTypes = {
     body: PropTypes.object,
     footer: PropTypes.object,
     button: PropTypes.object,
-    isShow: PropTypes.bool
+    isShow: PropTypes.bool.isRequired
 }
 
 export default Popup;
