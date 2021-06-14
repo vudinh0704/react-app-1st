@@ -106,7 +106,7 @@ const Popup = props => {
                             type={props.button.optionalBtn.type}
                             text={props.button.optionalBtn.text || 'Optional'}
                             style={{
-                                'button': {...styleOptionalBtn},
+                                'root': {...styleOptionalBtn},
                                 'icon': {'fontSize': '1rem'}
                             }}
                             iconRight={props.button.optionalBtn.iconRight}
@@ -120,7 +120,7 @@ const Popup = props => {
                         type={props.button?.cancelBtn?.type || 'cancel'}
                         text={props.button?.cancelBtn?.text || 'Cancel'}
                         style={{
-                            'button': {...styleCancelBtn},
+                            'root': {...styleCancelBtn},
                             'icon': {'fontSize': '1rem'}
                         }}
                         iconRight={props.button?.cancelBtn?.iconRight}
