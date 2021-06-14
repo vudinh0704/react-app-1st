@@ -35,8 +35,3 @@
     justify-content: center;
     padding: .75rem .75rem;
 }
-
-.toast__icon {
-    cursor: pointer;
-    font-size: 12.5px;
-}
