@@ -3,11 +3,6 @@
     display: flex;
 }
 
-.input:disabled {
-    cursor: not-allowed;
-    opacity: .65;
-}
-
 .input__label {
     font-size: 1.5rem;
     padding-bottom: .25rem;
@@ -28,4 +23,9 @@
     -moz-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     -ms-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     -o-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.input__value:disabled {
+    cursor: not-allowed;
+    opacity: .65;
 }
